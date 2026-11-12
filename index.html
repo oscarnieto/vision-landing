@@ -3,21 +3,158 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- GitHub Pages no permite cabeceras HTTP propias: la CSP y la política de referer van en meta. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self' data:; media-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <!-- GitHub Pages no permite cabeceras HTTP propias: la CSP y la política de referer van en meta.
+       El hash sha256 autoriza solo el script de arranque de ScrollKit. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net 'sha256-CwWbBf7jQqvh/bJnN8zix/pIAcILUmqMV5j4DXi/Lmo='; style-src 'self'; img-src 'self' data:; media-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="Vision">
   <title>Vision</title>
+
+  <!-- ScrollKit: siempre primero en el head -->
+  <script>document.documentElement.classList.add('sk-js');try{var s=sessionStorage,d=document.documentElement;if(s.getItem('sk-intro'))d.classList.add('sk-intro-seen');if(s.getItem('sk-transition'))d.classList.add('sk-arriving')}catch(e){}</script>
+  <link rel="stylesheet" href="scroll-kit/css/scroll-kit.css">
+
+  <link rel="preload" as="image" href="assets/img/hero-poster.jpg">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <header class="hero">
-    <video class="hero-video" src="assets/hero-video/hero-video.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Vision</h1>
-      <p>Muy pronto.</p>
-    </div>
+
+  <!-- E02 · Header inteligente -->
+  <header class="site-header" data-header data-header-theme="dark">
+    <a class="logo" href="#top" aria-label="Vision, inicio">Vision<span aria-hidden="true">®</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a class="pill" href="#proyectos" data-offset="0">Proyectos</a>
+      <a class="pill" href="#vision" data-offset="0">Visión</a>
+      <a class="pill" href="#ciudades" data-offset="0">Ciudades</a>
+      <a class="pill" href="#contacto" data-offset="0">Contacto</a>
+    </nav>
+    <span class="lang">ES</span>
   </header>
+
+  <main id="top">
+
+    <!-- HERO · E29 vídeo diferido + E16 parallax del fondo + E09 título por líneas -->
+    <section class="hero" data-theme="dark">
+      <div class="hero-media" data-image-move="18">
+        <video data-video data-src="assets/video/hero.mp4" data-src-mobile="assets/video/hero-mobile.mp4"
+               poster="assets/img/hero-poster.jpg" autoplay muted playsinline aria-hidden="true"></video>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 data-reveal="lines">Ciudades que se<br>miran de otra forma</h1>
+        <p class="scroll-hint">Desliza para explorar <span aria-hidden="true">↓</span></p>
+      </div>
+    </section>
+
+    <!-- SECTION 1 · E12 párrafo que se ilumina con el scroll -->
+    <section class="section-1" id="vision" data-theme="light">
+      <p class="eyebrow">Nuestra visión</p>
+      <p class="manifesto" data-reveal="scrub" data-from="0.15">Creemos que cada ciudad tiene una forma propia de mirarse. Recorremos sus calles, su luz y su gente para contar lo que no aparece en las postales.</p>
+    </section>
+
+    <!-- SECTION 2 · E24 capas que se apilan (efecto Floema) + E16 parallax. 4 diapositivas -->
+    <div class="section-2" id="proyectos" data-stack data-shade="0.55">
+      <section class="slide" data-theme="dark">
+        <figure class="slide-media" data-image-move="20"><img src="assets/img/barcelona.jpg" alt="" width="1280" height="720"></figure>
+        <div class="slide-inner">
+          <div class="slide-side"><span class="slide-num">01</span><span class="slide-label">Hecho para durar</span></div>
+          <div class="slide-main" data-stack-move="8">
+            <span class="tag">Barcelona</span>
+            <h2>Título provisional de la primera diapositiva</h2>
+            <a class="btn" href="#ciudades"><span class="btn-icon" aria-hidden="true">→</span><span class="btn-text">Ver proyecto</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="slide" data-theme="dark">
+        <figure class="slide-media" data-image-move="20"><img src="assets/img/malaga.jpg" alt="" width="1280" height="720" loading="lazy"></figure>
+        <div class="slide-inner">
+          <div class="slide-side"><span class="slide-num">02</span><span class="slide-label">Hecho para durar</span></div>
+          <div class="slide-main" data-stack-move="8">
+            <span class="tag">Málaga</span>
+            <h2>Título provisional de la segunda diapositiva</h2>
+            <a class="btn" href="#ciudades"><span class="btn-icon" aria-hidden="true">→</span><span class="btn-text">Ver proyecto</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="slide" data-theme="dark">
+        <figure class="slide-media" data-image-move="20"><img src="assets/img/sevilla.jpg" alt="" width="1280" height="720" loading="lazy"></figure>
+        <div class="slide-inner">
+          <div class="slide-side"><span class="slide-num">03</span><span class="slide-label">Hecho para durar</span></div>
+          <div class="slide-main" data-stack-move="8">
+            <span class="tag">Sevilla</span>
+            <h2>Título provisional de la tercera diapositiva</h2>
+            <a class="btn" href="#ciudades"><span class="btn-icon" aria-hidden="true">→</span><span class="btn-text">Ver proyecto</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="slide" data-theme="dark">
+        <figure class="slide-media" data-image-move="20"><img src="assets/img/valencia.jpg" alt="" width="1280" height="720" loading="lazy"></figure>
+        <div class="slide-inner">
+          <div class="slide-side"><span class="slide-num">04</span><span class="slide-label">Hecho para durar</span></div>
+          <div class="slide-main">
+            <span class="tag">Valencia</span>
+            <h2>Título provisional de la cuarta diapositiva</h2>
+            <a class="btn" href="#ciudades"><span class="btn-icon" aria-hidden="true">→</span><span class="btn-text">Ver proyecto</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECTION 3 · E19 la imagen central crece con el scroll hasta su tamaño -->
+    <section class="section-3" data-theme="light">
+      <div class="s3-frame">
+        <div class="s3-image" data-expand="32% 36%" data-radius="6" data-pin data-length="140%">
+          <img src="assets/img/barcelona-2.jpg" alt="" width="1280" height="720" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 + FOOTER · E24: el footer se monta encima de la sección 4 -->
+    <div class="closing" data-stack data-shade="0.6">
+
+      <!-- SECTION 4 · E27 lista que se ilumina + E28 imagen pegada + E16 parallax -->
+      <section class="section-4" id="ciudades" data-theme="light">
+        <div class="s4-head">
+          <p class="eyebrow">Ciudades</p>
+          <h2 data-reveal="lines">Dónde hemos estado</h2>
+        </div>
+        <div class="s4-body">
+          <div class="s4-media" data-sticky="110">
+            <figure data-highlight-media data-image-move="20"><img src="assets/img/barcelona.jpg" alt="Barcelona" width="1280" height="720" loading="lazy"></figure>
+            <figure data-highlight-media data-image-move="20"><img src="assets/img/malaga-2.jpg" alt="Málaga" width="1280" height="720" loading="lazy"></figure>
+            <figure data-highlight-media data-image-move="20"><img src="assets/img/sevilla.jpg" alt="Sevilla" width="1280" height="720" loading="lazy"></figure>
+            <figure data-highlight-media data-image-move="20"><img src="assets/img/valencia.jpg" alt="Valencia" width="1280" height="720" loading="lazy"></figure>
+          </div>
+          <ul class="cities" data-highlight data-dim="0.2">
+            <li><span class="city">Barcelona</span><span class="years">2021 — 2026</span></li>
+            <li><span class="city">Málaga</span><span class="years">2021 — 2026</span></li>
+            <li><span class="city">Sevilla</span><span class="years">2022 — 2025</span></li>
+            <li><span class="city">Valencia</span><span class="years">2025 — 2026</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="site-footer" id="contacto" data-theme="dark">
+        <div class="footer-top">
+          <p class="footer-claim">¿Hablamos?</p>
+          <ul class="footer-links">
+            <li><a href="#top">Inicio</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#ciudades">Ciudades</a></li>
+          </ul>
+        </div>
+        <p class="footer-word" aria-hidden="true">Vision</p>
+        <p class="footer-legal">© 2026 Vision</p>
+      </footer>
+    </div>
+
+  </main>
+
+  <!-- ScrollKit: librerías al final, en este orden (con SRI) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" integrity="sha384-SWJ0lLVRoipvHh59xj0pL7uC7Ih51F+5smaFtrG+2nr+TlDZU5SYJHmxfolbeNTr" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" integrity="sha384-R18XzqnxvVLEF+BYfhpmDx30v7eP83fAckyfoRzK7/Uf6nGqufcmsk0eAKo7S3RU" crossorigin="anonymous"></script>
+  <script src="scroll-kit/js/scroll-kit.js"></script>
 </body>
 </html>
