@@ -10,7 +10,7 @@
 ## Proyecto
 
 - Landing estática sin compilación (HTML + CSS + ScrollKit).
-- Diseño en Figma: https://www.figma.com/design/cT53PBxZRYSFmXaFfmWtWC/Landing-Vision?node-id=6-279
+- Diseño en Figma (fuente de verdad, reproducirlo fielmente): https://www.figma.com/design/jdwx4oQaPNUSJVW76JAmQG/Residential-New-Developments?node-id=225-788 (frame «Index», 1440 px). Imágenes y SVG exportados en `assets/figma/`.
 - `assets/hero-video/` (vídeo original, proyecto de Premiere y clips en bruto) está en `.gitignore`. La web usa `assets/video/hero.mp4` (1280×720, 1,4 Mbps) y `assets/video/hero-mobile.mp4` (960×540, 0,75 Mbps), oscurecidos −0,6 EV, y el póster `assets/img/hero-poster.jpg`. Si cambia el vídeo original, regenerarlos igual (no hay ffmpeg: usar AVFoundation con Swift).
 - Las librerías de ScrollKit se cargan de jsDelivr con `integrity` (SRI). Si cambia su versión o el script inline del `<head>`, recalcular los hashes y actualizar la CSP.
 - Aplicar la skill `seguridad-aplicaciones` y entregar el informe de cumplimiento tras cada cambio de código.
