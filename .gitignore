@@ -1,0 +1,7 @@
+.DS_Store
+.claude/
+# Proyecto de Premiere y clips en bruto: solo se publica el vídeo final
+assets/hero-video/*.prproj
+assets/hero-video/*.prin
+assets/hero-video/Adobe Premiere Pro Auto-Save/
+assets/hero-video/assets/
