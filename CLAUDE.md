@@ -12,3 +12,7 @@
 - Landing estática sin dependencias ni compilación (HTML + CSS).
 - El vídeo del hero es `assets/hero-video/hero-video.mp4`. El proyecto de Premiere y los clips en bruto están en `.gitignore` y no se suben.
 - Aplicar la skill `seguridad-aplicaciones` y entregar el informe de cumplimiento tras cada cambio de código.
+
+## Idioma
+
+- Hablar siempre en español con el usuario.
