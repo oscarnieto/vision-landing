@@ -10,3 +10,5 @@ assets/video/barcelona.mp4
 assets/video/malaga.mp4
 assets/video/sevilla.mp4
 assets/video/valencia.mp4
+# Fotos originales de las ediciones: se publican las optimizadas de assets/img/ediciones/
+assets/img/*_[0-9].jpg
