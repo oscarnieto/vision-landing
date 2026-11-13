@@ -172,9 +172,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   color: var(--black);
   white-space: nowrap;
 }
-/* Estado final: insignia visible y el conjunto logo + insignia centrado */
+/* Estado final: insignia visible bajo el logo (el logo no se mueve) */
 .hero-logo.is-badged .hero-badge { opacity: 1; }
-.hero-logo.is-badged .hero-brand { transform: translateY(-7.78cqw); }
 
 /* ---------- Section 1 (E12) ---------- */
 .section-1 { padding: clamp(96px, 16.05vw, 231px) 0; }

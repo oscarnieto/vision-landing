@@ -24,7 +24,7 @@
 - No modificar los archivos del kit salvo petición expresa. El diseño va en el CSS del proyecto.
 - Excepción acordada: la barra de progreso de la sección 2 la mueve `assets/js/ediciones.js` leyendo el avance del carril E25 (`_skTween`), porque E07 mide la sección entera y no el tramo fijado.
 - Excepción acordada: en la sección 4, la línea amarilla que sigue al ratón por las pestañas y la entrada escalonada de las tarjetas al filtrar (GSAP) están en `assets/js/ediciones.js`; ScrollKit no tiene efectos de filtro ni de hover.
-- Excepción acordada: animación de entrada del logo VISIÓN del hero en `assets/js/logo-intro.js` (GSAP). El logo va en línea en `index.html` con los mismos trazados que `assets/figma/vision-logo.svg`; si cambia el logo, actualizar ambos y las máscaras (S, O, diagonal de la N).
+- Excepción acordada: animación de entrada del logo VISIÓN del hero en `assets/js/logo-intro.js` (GSAP). El logo va en línea en `index.html` con los mismos trazados que `assets/figma/vision-logo.svg`; si cambia el logo, actualizar ambos y los recortes `clipPath` (S, O, diagonal de la N). No usar máscaras ni filtros SVG en esa animación: Safari (iPhone) los pinta mal y aparecen manchas blancas.
 - El header NO usa E02: va en `position: absolute` sobre el hero, se va con el scroll y no reaparece al subir (petición del usuario).
 - Toda página HTML nueva parte de `.claude/skills/scrollkit/plantilla.html`.
 
