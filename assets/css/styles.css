@@ -138,7 +138,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform: translate(-50%, -50%);
   line-height: 0;
 }
-.hero-logo img { width: 100%; height: auto; }
+.hero-logo img,
+.hero-logo svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* Oculto hasta que arranca la animación; si el JS falla, aparece a los 4 s */
+.sk-js .hero-logo { visibility: hidden; animation: logo-safety 0s 4s forwards; }
+@keyframes logo-safety { to { visibility: visible; } }
 
 /* ---------- Section 1 (E12) ---------- */
 .section-1 { padding: clamp(96px, 16.05vw, 231px) 0; }
