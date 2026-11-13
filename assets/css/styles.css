@@ -89,11 +89,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .u-link:hover .u-link__arrow { transform: translateX(4px); }
 }
 
-/* ---------- Header (E02) ---------- */
-.site-header { color: var(--white); }
-.site-header[data-header-theme="dark"]  { color: var(--white); }
-.site-header[data-header-theme="light"] { color: var(--black); }
-.site-header[data-header-theme="light"] .menu-icon { filter: invert(1); }
+/* ---------- Header: sobre el hero, se va con el scroll ---------- */
+.site-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  color: var(--white);
+}
 
 .header-inner {
   width: min(1270px, 100% - 2 * var(--gutter));
@@ -333,8 +335,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .ed-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: max-content;
   gap: 26px 27.5px;
   margin-top: 38.8px;
+  /* Altura mínima estable: con pocas tarjetas (p. ej. Valencia) la sección no se encoge
+     y el footer (E24) no se monta encima mientras se ven las pestañas */
+  min-height: calc(100svh - 240px);
 }
 .ed-card { position: relative; }
 .ed-card[hidden] { display: none; }
