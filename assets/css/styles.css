@@ -84,6 +84,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform-origin: right center;
   transition: transform .7s var(--ease);
 }
+/* Edición aún sin publicar: mismo texto, sin enlace ni subrayado */
+.u-link--soon { color: rgba(255, 255, 255, .55); }
+
 @media (hover: hover) {
   .u-link:hover .u-link__line { transform: scaleX(0); }
   .u-link:hover .u-link__arrow { transform: translateX(4px); }
@@ -342,9 +345,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
      y el footer (E24) no se monta encima mientras se ven las pestañas */
   min-height: calc(100svh - 240px);
 }
-.ed-card { position: relative; }
+.ed-card { position: relative; display: block; color: inherit; }
+.ed-card--soon { cursor: default; }
 .ed-card[hidden] { display: none; }
 .ed-card__media {
+  position: relative;
   aspect-ratio: 296.38 / 305.71;
   border-radius: 10px;
   overflow: hidden;
@@ -352,6 +357,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .ed-card__zoom { height: 100%; transition: transform 1.2s var(--ease); }
 .ed-card__zoom--empty { background: var(--placeholder); }
+.ed-card__soon {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
 .ed-card__row {
   position: relative;
   display: flex;
@@ -417,6 +437,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-size: 14px;
   line-height: 1.41;
 }
+.footer-col p a:hover { text-decoration: underline; }
+.footer-soon { opacity: .5; }
 .footer-savills { color: var(--red); }
 .footer-savills:hover { text-decoration: underline; }
 
