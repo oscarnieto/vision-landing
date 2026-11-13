@@ -3,3 +3,5 @@
 .claude/settings.local.json
 # Vídeo original, proyecto de Premiere y clips en bruto: se publican solo las versiones optimizadas de assets/video/
 assets/hero-video/
+# Vídeo original subido a la carpeta de vídeo: solo se publican hero.mp4 y hero-mobile.mp4
+assets/video/hero-video*.mp4
