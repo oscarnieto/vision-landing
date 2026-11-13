@@ -147,6 +147,35 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .hero-logo.is-small { width: 31.14%; }
 @media (max-width: 767px) { .hero-logo.is-small { width: 64%; } }
 
+/* «10º ANIVERSARIO»: medidas proporcionales al ancho del logo (cqw = 1 % del ancho del h1) */
+.hero-logo { container-type: inline-size; }
+.hero-brand { position: relative; display: block; }
+.hero-badge {
+  position: absolute;
+  top: calc(100% + 8.45cqw);
+  left: 20.1%;
+  width: 59.8%;
+  height: 7.11cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--yellow);
+  opacity: 0;
+}
+.hero-badge__text {
+  display: block;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 5.79cqw;
+  line-height: 1;
+  color: var(--black);
+  white-space: nowrap;
+}
+/* Estado final: insignia visible y el conjunto logo + insignia centrado */
+.hero-logo.is-badged .hero-badge { opacity: 1; }
+.hero-logo.is-badged .hero-brand { transform: translateY(-7.78cqw); }
+
 /* ---------- Section 1 (E12) ---------- */
 .section-1 { padding: clamp(96px, 16.05vw, 231px) 0; }
 .section-1 .kicker { margin-bottom: clamp(24px, 3.24vw, 47px); }

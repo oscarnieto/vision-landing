@@ -1,7 +1,7 @@
 /* Animación de entrada del logo VISIÓN del hero (inspirada en el motion graphics de referencia):
    la V aparece sola en el centro, se desliza a su sitio con desenfoque de movimiento, las I y los
    palos de la N entran desde la derecha, la S, la O y la diagonal de la N se dibujan, la barra se traza
-   y, ya construido, el logo pasa de grande a pequeño.
+   y, ya construido, el logo pasa de grande a pequeño y aparece la insignia «10º ANIVERSARIO».
    ScrollKit no tiene un efecto de construcción de logotipo, por eso va aparte con GSAP. */
 (function () {
   'use strict';
@@ -19,10 +19,31 @@
     if (window.gsap) window.gsap.set(svg, { clearProps: 'transform' });
   }
 
+  // «10º ANIVERSARIO»: la banda amarilla se despliega de izquierda a derecha, el texto sube dentro
+  // y el logo se eleva para que el conjunto quede centrado (estado final en CSS: .is-badged)
+  function badgeIn() {
+    var badge = logo.querySelector('.hero-badge');
+    var text = logo.querySelector('.hero-badge__text');
+    var brand = logo.querySelector('.hero-brand');
+    if (!badge || !text || !brand) return;
+    var g = window.gsap;
+    g.timeline({
+      onComplete: function () {
+        logo.classList.add('is-badged');
+        g.set([badge, text, brand], { clearProps: 'all' });
+      }
+    })
+      .set(badge, { opacity: 1, clipPath: 'inset(0% 100% 0% 0%)' })
+      .set(text, { yPercent: 120 })
+      .to(brand, { y: function () { return -logo.offsetWidth * 0.0778; }, duration: 1, ease: 'expo.inOut' }, 0)
+      .to(badge, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: 'expo.inOut' }, 0.15)
+      .to(text, { yPercent: 0, duration: 0.8, ease: 'expo.out' }, 0.6);
+  }
+
   var gsap = window.gsap;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!gsap) { show(); return; }
-  if (reduce) { settleSmall(); show(); return; }
+  if (reduce) { settleSmall(); logo.classList.add('is-badged'); show(); return; }
 
   try {
     var q = function (sel) { return svg.querySelectorAll(sel); };
@@ -56,6 +77,7 @@
         q('[mask]').forEach(function (el) { el.removeAttribute('mask'); });
         // Fijar el tamaño pequeño con CSS para que se adapte si cambia el ancho de la ventana
         settleSmall();
+        badgeIn();
       }
     });
 
