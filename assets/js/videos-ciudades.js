@@ -14,9 +14,17 @@
 
   function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
 
+  // Pósters (data-poster): se ponen cuando la sección se acerca, para no descargarlos al abrir la página
+  function posters() {
+    videos.forEach(function (v) {
+      if (v.dataset.poster && !v.getAttribute('poster')) v.setAttribute('poster', v.dataset.poster);
+    });
+  }
+
   // Carga diferida: los vídeos empiezan a descargarse cuando la sección se acerca
   // `except`: el vídeo que se va a reproducir ya (play() lo descarga solo; load() lo interrumpiría)
   function preload(except) {
+    posters();
     videos.forEach(function (v) {
       if (v === except) { v.preload = 'auto'; return; }
       if (v.preload === 'auto') return;
@@ -25,6 +33,11 @@
     });
   }
   if (hasIO && section) {
+    // Pósters con algo más de antelación (2 pantallas) que los vídeos (1 pantalla)
+    var nearPoster = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { posters(); nearPoster.disconnect(); }
+    }, { rootMargin: '0px 0px 200% 0px' });
+    nearPoster.observe(section);
     var near = new IntersectionObserver(function (entries) {
       if (entries.some(function (e) { return e.isIntersecting; })) { preload(); near.disconnect(); }
     }, { rootMargin: '0px 0px 100% 0px' });
