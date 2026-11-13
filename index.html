@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <!-- SECTION 2 · E25 scroll horizontal (estilo bitwip) + E16 parallax + hover -->
+    <!-- SECTION 2 · E25 scroll horizontal (estilo bitwip) + E16 parallax + vídeo de cada ciudad que se reproduce al pasar el ratón -->
     <section class="section-2" id="ultimas" data-horizontal data-theme="dark">
       <div class="s2-track" data-horizontal-track>
         <div class="s2-intro">
@@ -74,9 +74,13 @@
         </div>
 
         <article class="latest">
-          <div class="latest__media" data-cursor-text="Visita la web">
-            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-card-barcelona.jpg" alt="" width="797" height="1200"></div>
-          </div>
+          <a class="latest__media" href="#ediciones" tabindex="-1" aria-hidden="true" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12">
+              <video class="city-video" muted loop playsinline preload="none" poster="assets/img/poster-barcelona.jpg" width="760" height="720">
+                <source src="assets/video/ciudades/barcelona.mp4" type="video/mp4">
+              </video>
+            </div>
+          </a>
           <div class="latest__row"><h3>Barcelona</h3><span>2026</span></div>
           <a class="u-link" href="#ediciones" aria-label="Visita la web de Barcelona 2026">
             <span>Visita la web</span>
@@ -86,9 +90,13 @@
         </article>
 
         <article class="latest">
-          <div class="latest__media" data-cursor-text="Visita la web">
-            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-card-malaga.jpg" alt="" width="900" height="1200" loading="lazy"></div>
-          </div>
+          <a class="latest__media" href="#ediciones" tabindex="-1" aria-hidden="true" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12">
+              <video class="city-video" muted loop playsinline preload="none" poster="assets/img/poster-malaga.jpg" width="760" height="720">
+                <source src="assets/video/ciudades/malaga.mp4" type="video/mp4">
+              </video>
+            </div>
+          </a>
           <div class="latest__row"><h3>Málaga</h3><span>2026</span></div>
           <a class="u-link" href="#ediciones" aria-label="Visita la web de Málaga 2026">
             <span>Visita la web</span>
@@ -98,9 +106,13 @@
         </article>
 
         <article class="latest">
-          <div class="latest__media" data-cursor-text="Visita la web">
-            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-valencia.jpg" alt="" width="1024" height="683" loading="lazy"></div>
-          </div>
+          <a class="latest__media" href="#ediciones" tabindex="-1" aria-hidden="true" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12">
+              <video class="city-video" muted loop playsinline preload="none" poster="assets/img/poster-valencia.jpg" width="760" height="720">
+                <source src="assets/video/ciudades/valencia.mp4" type="video/mp4">
+              </video>
+            </div>
+          </a>
           <div class="latest__row"><h3>Valencia</h3><span>2026</span></div>
           <a class="u-link" href="#ediciones" aria-label="Visita la web de Valencia 2026">
             <span>Visita la web</span>
@@ -110,9 +122,13 @@
         </article>
 
         <article class="latest">
-          <div class="latest__media" data-cursor-text="Visita la web">
-            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></div>
-          </div>
+          <a class="latest__media" href="#ediciones" tabindex="-1" aria-hidden="true" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12">
+              <video class="city-video" muted loop playsinline preload="none" poster="assets/img/poster-sevilla.jpg" width="760" height="720">
+                <source src="assets/video/ciudades/sevilla.mp4" type="video/mp4">
+              </video>
+            </div>
+          </a>
           <div class="latest__row"><h3>Sevilla</h3><span>2025</span></div>
           <a class="u-link" href="#ediciones" aria-label="Visita la web de Sevilla 2025">
             <span>Visita la web</span>
@@ -345,5 +361,6 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" integrity="sha384-R18XzqnxvVLEF+BYfhpmDx30v7eP83fAckyfoRzK7/Uf6nGqufcmsk0eAKo7S3RU" crossorigin="anonymous"></script>
   <script src="scroll-kit/js/scroll-kit.js"></script>
   <script src="assets/js/ediciones.js"></script>
+  <script src="assets/js/videos-ciudades.js"></script>
 </body>
 </html>

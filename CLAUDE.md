@@ -12,6 +12,7 @@
 - Landing estática sin compilación (HTML + CSS + ScrollKit).
 - Diseño en Figma (fuente de verdad, reproducirlo fielmente): https://www.figma.com/design/jdwx4oQaPNUSJVW76JAmQG/Residential-New-Developments?node-id=231-993 (frame «Index», 1440 px; versión anterior: 225-788). Imágenes y SVG exportados en `assets/figma/`.
 - `assets/hero-video/` (vídeos originales, proyecto de Premiere y clips en bruto) está en `.gitignore`. El original actual es `assets/video/hero-video-v2.mp4` (1920×1080, 25 fps, 15,9 Mbps; ignorado en git). La web usa `assets/video/hero.mp4` (1920×1080, 5 Mbps) y `assets/video/hero-mobile.mp4` (1280×720, 2,5 Mbps), oscurecidos −0,6 EV, y el póster `assets/img/hero-poster.jpg`. Por debajo de ~3 Mbps se ve pixelado. Si cambia el original, regenerarlos igual (no hay ffmpeg: usar AVFoundation con Swift).
+- Vídeos de las ciudades (sección 2): originales en `assets/video/{barcelona,malaga,sevilla,valencia}.mp4` (ignorados en git). La web usa `assets/video/ciudades/*.mp4`: recorte central 760×720 (lo visible en la tarjeta + margen del parallax), 30 fps, sin oscurecer (Barcelona y Málaga 3,5 Mbps, Sevilla 2,5, Valencia 2), y pósters `assets/img/poster-<ciudad>.jpg`. Se reproducen al pasar el ratón (`assets/js/videos-ciudades.js`).
 - Las librerías de ScrollKit se cargan de jsDelivr con `integrity` (SRI). Si cambia su versión o el script inline del `<head>`, recalcular los hashes y actualizar la CSP.
 - Aplicar la skill `seguridad-aplicaciones` y entregar el informe de cumplimiento tras cada cambio de código.
 

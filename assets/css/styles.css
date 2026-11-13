@@ -203,7 +203,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   overflow: hidden;
   background: var(--grey);
 }
+.latest__media { display: block; }
 .latest__zoom { height: 100%; transition: transform 1.2s var(--ease); }
+/* Sin ScrollKit (o antes de que arranque) el vídeo cubre el marco igualmente */
+.latest__zoom:not(.sk-move-x):not(.sk-move-y) > video { width: 100%; height: 100%; object-fit: cover; }
 .latest__row {
   width: 100%;
   height: 65.18px;

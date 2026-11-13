@@ -5,3 +5,8 @@
 assets/hero-video/
 # Vídeo original subido a la carpeta de vídeo: solo se publican hero.mp4 y hero-mobile.mp4
 assets/video/hero-video*.mp4
+# Vídeos originales de las ciudades: se publican las versiones optimizadas de assets/video/ciudades/
+assets/video/barcelona.mp4
+assets/video/malaga.mp4
+assets/video/sevilla.mp4
+assets/video/valencia.mp4
