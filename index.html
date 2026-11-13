@@ -16,11 +16,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,500&display=swap">
   <link rel="preload" as="image" href="assets/img/hero-poster.jpg">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+
+  <!-- E06 · cursor con etiqueta (solo se ve sobre las imágenes con data-cursor-text) -->
+  <div class="cursor-pill" data-cursor aria-hidden="true"><span data-cursor-label></span></div>
 
   <!-- Header (E02) -->
   <header class="site-header" data-header data-header-theme="dark">
@@ -52,75 +55,99 @@
     <!-- SECTION 1 · E12 -->
     <section class="section-1" data-theme="light">
       <div class="container">
-        <h2 class="kicker">¿Qué es Visión?</h2>
+        <h2 class="kicker"><em>¿Qué es</em> Visión?</h2>
         <p class="s1-text" data-reveal="scrub" data-from="0.15">En VISIÓN avanzamos cómo vemos el futuro del real estate en España. Analizamos la situación actual del mercado inmobiliario de cada ciudad en el contexto global. Reflexionamos sobre las tendencias que influyen en las necesidades de espacio en cada uso, la situación socioeconómica y cómo afecta nuestro sector en la sociedad a través de la visión de nuestros expertos.</p>
       </div>
     </section>
 
-    <!-- SECTION 2 · E24 capas que se apilan (efecto Floema) + E16 parallax -->
-    <div class="section-2" data-stack data-shade="0.55">
-      <section class="edition" data-theme="dark">
-        <figure class="edition-media" data-image-move="20"><img src="assets/figma/s2-barcelona.jpg" alt="" width="1024" height="683"></figure>
-        <div class="edition-inner container">
-          <p class="edition-tag">Lo último</p>
-          <div class="edition-bar">
-            <h3 class="edition-title">BARCELONA 2026</h3>
-            <img class="edition-line" src="assets/figma/line-15.svg" alt="" width="806" height="2">
-            <a class="edition-link" href="#ediciones" aria-label="Acceder a Barcelona 2026">ACCEDER</a>
-          </div>
+    <!-- SECTION 2 · E25 scroll horizontal (estilo bitwip) + E16 parallax + hover -->
+    <section class="section-2" id="ultimas" data-horizontal data-theme="dark">
+      <div class="s2-track" data-horizontal-track>
+        <div class="s2-intro">
+          <h2 class="s2-title">Descubre las <em>últimas ediciones</em></h2>
+          <p class="s2-text">Lorem ipsum es un texto de relleno estándar utilizado en diseño gráfico, editorial y web para previsualizar maquetas.</p>
+          <a class="u-link" href="#ediciones">
+            <span>Ver todas las ediciones</span>
+            <img class="u-link__arrow" src="assets/figma/arrow-2.svg" alt="" width="15" height="11">
+            <img class="u-link__line" src="assets/figma/line-16.svg" alt="" width="225" height="2">
+          </a>
         </div>
-      </section>
-      <section class="edition" data-theme="dark">
-        <figure class="edition-media edition-media--bottom" data-image-move="20"><img src="assets/figma/s2-malaga.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-        <div class="edition-inner container">
-          <p class="edition-tag">Lo último</p>
-          <div class="edition-bar">
-            <h3 class="edition-title">MÁLAGA 2026</h3>
-            <img class="edition-line" src="assets/figma/line-15.svg" alt="" width="806" height="2">
-            <a class="edition-link" href="#ediciones" aria-label="Acceder a Málaga 2026">ACCEDER</a>
-          </div>
-        </div>
-      </section>
-      <section class="edition" data-theme="dark">
-        <figure class="edition-media edition-media--bottom" data-image-move="20"><img src="assets/figma/s2-valencia.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-        <div class="edition-inner container">
-          <p class="edition-tag">Lo último</p>
-          <div class="edition-bar">
-            <h3 class="edition-title">VALENCIA 2026</h3>
-            <img class="edition-line" src="assets/figma/line-15.svg" alt="" width="806" height="2">
-            <a class="edition-link" href="#ediciones" aria-label="Acceder a Valencia 2026">ACCEDER</a>
-          </div>
-        </div>
-      </section>
-      <section class="edition" data-theme="dark">
-        <figure class="edition-media edition-media--bottom" data-image-move="20"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-        <div class="edition-inner container">
-          <p class="edition-tag">Lo último</p>
-          <div class="edition-bar">
-            <h3 class="edition-title">SEVILLA 2026</h3>
-            <img class="edition-line" src="assets/figma/line-15.svg" alt="" width="806" height="2">
-            <a class="edition-link" href="#ediciones" aria-label="Acceder a Sevilla 2026">ACCEDER</a>
-          </div>
-        </div>
-      </section>
-    </div>
 
-    <!-- SECTION 3 · E19 la imagen central crece hasta su tamaño + E16 parallax en las laterales -->
+        <article class="latest">
+          <div class="latest__media" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-card-barcelona.jpg" alt="" width="797" height="1200"></div>
+          </div>
+          <div class="latest__row"><h3>Barcelona</h3><span>2026</span></div>
+          <a class="u-link" href="#ediciones" aria-label="Visita la web de Barcelona 2026">
+            <span>Visita la web</span>
+            <img class="u-link__arrow" src="assets/figma/arrow-2.svg" alt="" width="15" height="11">
+            <img class="u-link__line" src="assets/figma/line-19.svg" alt="" width="133" height="2">
+          </a>
+        </article>
+
+        <article class="latest">
+          <div class="latest__media" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-card-malaga.jpg" alt="" width="900" height="1200" loading="lazy"></div>
+          </div>
+          <div class="latest__row"><h3>Málaga</h3><span>2026</span></div>
+          <a class="u-link" href="#ediciones" aria-label="Visita la web de Málaga 2026">
+            <span>Visita la web</span>
+            <img class="u-link__arrow" src="assets/figma/arrow-2.svg" alt="" width="15" height="11">
+            <img class="u-link__line" src="assets/figma/line-19.svg" alt="" width="133" height="2">
+          </a>
+        </article>
+
+        <article class="latest">
+          <div class="latest__media" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-valencia.jpg" alt="" width="1024" height="683" loading="lazy"></div>
+          </div>
+          <div class="latest__row"><h3>Valencia</h3><span>2026</span></div>
+          <a class="u-link" href="#ediciones" aria-label="Visita la web de Valencia 2026">
+            <span>Visita la web</span>
+            <img class="u-link__arrow" src="assets/figma/arrow-2.svg" alt="" width="15" height="11">
+            <img class="u-link__line" src="assets/figma/line-19.svg" alt="" width="133" height="2">
+          </a>
+        </article>
+
+        <article class="latest">
+          <div class="latest__media" data-cursor-text="Visita la web">
+            <div class="latest__zoom" data-image-move="12"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></div>
+          </div>
+          <div class="latest__row"><h3>Sevilla</h3><span>2025</span></div>
+          <a class="u-link" href="#ediciones" aria-label="Visita la web de Sevilla 2025">
+            <span>Visita la web</span>
+            <img class="u-link__arrow" src="assets/figma/arrow-2.svg" alt="" width="15" height="11">
+            <img class="u-link__line" src="assets/figma/line-19.svg" alt="" width="133" height="2">
+          </a>
+        </article>
+      </div>
+
+      <!-- Barra de progreso del carril -->
+      <div class="s2-progress container" aria-hidden="true">
+        <img class="s2-progress__track" src="assets/figma/line-17.svg" alt="" width="1268" height="1">
+        <img class="s2-progress__bar" src="assets/figma/line-20.svg" alt="" width="341" height="1">
+      </div>
+    </section>
+
+    <!-- SECTION 3 · E09 textos por líneas + E19 la imagen crece suavemente con el scroll -->
     <section class="section-3" data-theme="light">
       <div class="s3-head">
-        <h2 class="kicker">¿Por qué Visión?</h2>
-        <p class="s3-lead">El propósito de VISIÓN es ayudar a nuestros clientes en su toma de decisiones con el objetivo de avanzar todos en un camino común basado en conocimiento, sostenibilidad e innovación</p>
+        <h2 class="kicker" data-reveal="lines">¿Por qué Visión?</h2>
+        <p class="s3-lead" data-reveal="lines" data-delay="0.1">El propósito de VISIÓN es ayudar a nuestros clientes en su toma de decisiones con el objetivo de avanzar todos en un camino común basado en conocimiento, sostenibilidad e innovación</p>
       </div>
-      <div class="s3-gallery">
-        <figure class="s3-side s3-side--left" data-image-move="20"><img src="assets/figma/s3-left.jpg" alt="" width="692" height="1038" loading="lazy"></figure>
-        <div class="s3-center" data-expand="22% 26%">
-          <img src="assets/figma/s3-center.jpg" alt="" width="1113" height="1484" loading="lazy">
+      <div class="container">
+        <div class="s3-frame">
+          <div class="s3-image" data-expand="18% 30%" data-from="1.12">
+            <picture>
+              <source srcset="assets/figma/s3-wide.avif" type="image/avif">
+              <img src="assets/figma/s3-wide.png" alt="" width="2560" height="1406" loading="lazy">
+            </picture>
+          </div>
         </div>
-        <figure class="s3-side s3-side--right" data-image-move="20"><img src="assets/figma/s3-right.jpg" alt="" width="1038" height="692" loading="lazy"></figure>
-      </div>
-      <div class="s3-body">
-        <p>En tiempos de cambio necesitamos enfoques, perspectiva, criterio, experiencia y conocimiento para aportar claridad y esbozar escenarios futuros. VISION es una nueva plataforma de Savills que plantea la situación del real estate en las ciudades en las que estamos presentes desde un punto de vista transversal e integral.</p>
-        <p>De la mano de nuestros expertos en cada mercado y actividad, abordamos cada uno de los segmentos del sector inmobiliario, las tendencias globales y su penetración a nivel local en el uso de espacios de todo tipo. Analizamos la situación actual y los efectos de los cambios estructurales y socioecómicos que afectan a los distintos usos, desde oficinas, logístico y retail a residencial y nuevas formas de living, así como nuevos segmentos alternativos que surgen de las necesidades creadas por estos cambios.</p>
+        <div class="s3-body">
+          <p data-reveal="lines">En tiempos de cambio necesitamos enfoques, perspectiva, criterio, experiencia y conocimiento para aportar claridad y esbozar escenarios futuros. VISION es una nueva plataforma de Savills que plantea la situación del real estate en las ciudades en las que estamos presentes desde un punto de vista transversal e integral.</p>
+          <p data-reveal="lines">De la mano de nuestros expertos en cada mercado y actividad, abordamos cada uno de los segmentos del sector inmobiliario, las tendencias globales y su penetración a nivel local en el uso de espacios de todo tipo. Analizamos la situación actual y los efectos de los cambios estructurales y socioecómicos que afectan a los distintos usos, desde oficinas, logístico y retail a residencial y nuevas formas de living, así como nuevos segmentos alternativos que surgen de las necesidades creadas por estos cambios.</p>
+        </div>
       </div>
     </section>
 
@@ -129,105 +156,146 @@
 
       <section class="section-4" id="ediciones" data-theme="dark">
         <div class="container">
-          <h2 class="s4-title">Descubre <em>todas</em><br>las ediciones</h2>
-          <div class="filters" role="group" aria-label="Filtrar ediciones por ciudad">
-            <button class="filter" type="button" data-filter="all" aria-pressed="false">todas</button>
-            <button class="filter" type="button" data-filter="barcelona" aria-pressed="false">barcelona</button>
-            <button class="filter" type="button" data-filter="malaga" aria-pressed="true">Málaga</button>
-            <button class="filter" type="button" data-filter="sevilla" aria-pressed="false">sevilla</button>
-            <button class="filter" type="button" data-filter="valencia" aria-pressed="false">valencia</button>
+          <h2 class="s4-title">Descubre <em>todas las ediciones</em></h2>
+          <p class="s4-text">Lorem ipsum es un texto de relleno estándar utilizado en diseño gráfico, editorial y web para previsualizar maquetas y tipografías antes de insertar el contenido definitivo.Lorem ipsum es un texto de relleno estándar utilizado en diseño gráfico, editorial y web para previsualizar maquetas y tipografías antes de insertar el contenido definitivo.</p>
+
+          <div class="tabs" role="group" aria-label="Filtrar ediciones por ciudad">
+            <button class="tab" type="button" data-filter="all" aria-pressed="true" data-text="Todas">Todas</button>
+            <button class="tab" type="button" data-filter="barcelona" aria-pressed="false" data-text="Barcelona">Barcelona</button>
+            <button class="tab" type="button" data-filter="malaga" aria-pressed="false" data-text="Málaga">Málaga</button>
+            <button class="tab" type="button" data-filter="sevilla" aria-pressed="false" data-text="Sevilla">Sevilla</button>
+            <button class="tab" type="button" data-filter="valencia" aria-pressed="false" data-text="Valencia">Valencia</button>
+            <img class="tabs__line" src="assets/figma/line-17.svg" alt="" width="1268" height="1">
+            <img class="tabs__active" src="assets/figma/line-18.svg" alt="" width="56" height="3">
           </div>
-          <div class="cards">
-          <article class="card" data-city="barcelona">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-barcelona.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2026</span>
-            <h3 class="card-city">Barcelona</h3>
-          </article>
-          <article class="card" data-city="malaga">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s4-card-1.jpg" alt="" width="817" height="545" loading="lazy"></figure>
-            <span class="card-year">2026</span>
-            <h3 class="card-city">Málaga</h3>
-          </article>
-          <article class="card" data-city="valencia">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-valencia.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2026</span>
-            <h3 class="card-city">Valencia</h3>
-          </article>
-          <article class="card" data-city="barcelona">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-barcelona.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2025</span>
-            <h3 class="card-city">Barcelona</h3>
-          </article>
-          <article class="card" data-city="malaga">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s4-card-2.jpg" alt="" width="817" height="541" loading="lazy"></figure>
-            <span class="card-year">2025</span>
-            <h3 class="card-city">Málaga</h3>
-          </article>
-          <article class="card" data-city="sevilla">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2025</span>
-            <h3 class="card-city">Sevilla</h3>
-          </article>
-          <article class="card" data-city="valencia">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-valencia.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2025</span>
-            <h3 class="card-city">Valencia</h3>
-          </article>
-          <article class="card" data-city="barcelona">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-barcelona.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2024</span>
-            <h3 class="card-city">Barcelona</h3>
-          </article>
-          <article class="card" data-city="malaga">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s4-card-3.jpg" alt="" width="545" height="817" loading="lazy"></figure>
-            <span class="card-year">2024</span>
-            <h3 class="card-city">Málaga</h3>
-          </article>
-          <article class="card" data-city="sevilla">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2024</span>
-            <h3 class="card-city">Sevilla</h3>
-          </article>
-          <article class="card" data-city="barcelona">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-barcelona.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2023</span>
-            <h3 class="card-city">Barcelona</h3>
-          </article>
-          <article class="card" data-city="malaga">
-            <figure class="card-media card-media--pos-68" data-image-move="20"><img src="assets/figma/s4-card-4.jpg" alt="" width="817" height="613" loading="lazy"></figure>
-            <span class="card-year">2023</span>
-            <h3 class="card-city">Málaga</h3>
-          </article>
-          <article class="card" data-city="sevilla">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2023</span>
-            <h3 class="card-city">Sevilla</h3>
-          </article>
-          <article class="card" data-city="barcelona">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-barcelona.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2022</span>
-            <h3 class="card-city">Barcelona</h3>
-          </article>
-          <article class="card" data-city="malaga">
-            <figure class="card-media card-media--pos-88" data-image-move="20"><img src="assets/figma/s4-card-5.jpg" alt="" width="613" height="817" loading="lazy"></figure>
-            <span class="card-year">2022</span>
-            <h3 class="card-city">Málaga</h3>
-          </article>
-          <article class="card" data-city="sevilla">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2022</span>
-            <h3 class="card-city">Sevilla</h3>
-          </article>
-          <article class="card" data-city="barcelona">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s2-barcelona.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
-            <span class="card-year">2021</span>
-            <h3 class="card-city">Barcelona</h3>
-          </article>
-          <article class="card" data-city="malaga">
-            <figure class="card-media" data-image-move="20"><img src="assets/figma/s4-card-6.jpg" alt="" width="613" height="817" loading="lazy"></figure>
-            <span class="card-year">2021</span>
-            <h3 class="card-city">Málaga</h3>
-          </article>
+
+          <div class="ed-grid">
+            <article class="ed-card" data-city="barcelona" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s2-card-barcelona.jpg" alt="" width="797" height="1200" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Barcelona<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2026</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="malaga" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s2-card-malaga.jpg" alt="" width="900" height="1200" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Málaga<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2026</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="valencia" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s2-valencia.jpg" alt="" width="1024" height="683" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Valencia<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2026</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="barcelona" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Barcelona<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2025</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="malaga" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s4-card-2.jpg" alt="" width="817" height="541" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Málaga<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2025</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="valencia" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Valencia<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2025</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="sevilla" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s2-sevilla.jpg" alt="" width="1024" height="683" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Sevilla<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2025</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="barcelona" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Barcelona<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2024</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="malaga" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s4-card-3.jpg" alt="" width="545" height="817" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Málaga<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2024</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="sevilla" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Sevilla<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2024</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="barcelona" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Barcelona<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2023</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="malaga" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s4-card-4.jpg" alt="" width="817" height="613" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Málaga<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2023</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="sevilla" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Sevilla<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2023</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="barcelona" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Barcelona<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2022</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="malaga" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s4-card-5.jpg" alt="" width="613" height="817" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Málaga<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2022</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="sevilla" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Sevilla<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2022</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="barcelona" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom ed-card__zoom--empty"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Barcelona<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2021</span>
+              </div>
+            </article>
+            <article class="ed-card" data-city="malaga" data-cursor-text="Ver edición">
+              <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/figma/s4-card-6.jpg" alt="" width="613" height="817" loading="lazy"></div></div>
+              <div class="ed-card__row">
+                <h3 class="ed-card__city">Málaga<img class="ed-card__arrow" src="assets/figma/arrow-1.svg" alt="" width="18" height="15"></h3>
+                <span class="ed-card__year">2021</span>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -265,7 +333,6 @@
             <p>Este documento tiene un fin meramente informativo. Savills no se hace responsable de cualquier pérdida o perjuicio, directo o indirecto, derivado de su uso. Quedan reservados todos los derechos: se prohíbe su reproducción total o parcial sin previa autorización escrita de Savills Research. © Savills Commercial Ltd.</p>
           </div>
         </div>
-        <img class="footer-logo" src="assets/figma/logo-footer.svg" alt="" width="1440" height="330">
       </footer>
     </div>
 

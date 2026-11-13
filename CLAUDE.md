@@ -10,7 +10,7 @@
 ## Proyecto
 
 - Landing estática sin compilación (HTML + CSS + ScrollKit).
-- Diseño en Figma (fuente de verdad, reproducirlo fielmente): https://www.figma.com/design/jdwx4oQaPNUSJVW76JAmQG/Residential-New-Developments?node-id=225-788 (frame «Index», 1440 px). Imágenes y SVG exportados en `assets/figma/`.
+- Diseño en Figma (fuente de verdad, reproducirlo fielmente): https://www.figma.com/design/jdwx4oQaPNUSJVW76JAmQG/Residential-New-Developments?node-id=231-993 (frame «Index», 1440 px; versión anterior: 225-788). Imágenes y SVG exportados en `assets/figma/`.
 - `assets/hero-video/` (vídeos originales, proyecto de Premiere y clips en bruto) está en `.gitignore`. El original actual es `assets/video/hero-video-v2.mp4` (1920×1080, 25 fps, 15,9 Mbps; ignorado en git). La web usa `assets/video/hero.mp4` (1920×1080, 5 Mbps) y `assets/video/hero-mobile.mp4` (1280×720, 2,5 Mbps), oscurecidos −0,6 EV, y el póster `assets/img/hero-poster.jpg`. Por debajo de ~3 Mbps se ve pixelado. Si cambia el original, regenerarlos igual (no hay ffmpeg: usar AVFoundation con Swift).
 - Las librerías de ScrollKit se cargan de jsDelivr con `integrity` (SRI). Si cambia su versión o el script inline del `<head>`, recalcular los hashes y actualizar la CSP.
 - Aplicar la skill `seguridad-aplicaciones` y entregar el informe de cumplimiento tras cada cambio de código.
@@ -21,6 +21,7 @@
 - Catálogo de efectos con códigos E01–E31, snippets y recetas: `.claude/skills/scrollkit/EFECTOS.md`. Leerlo antes de añadir cualquier animación.
 - Cuando se pida un efecto por código (p. ej. "E16 en la galería"), aplicar el snippet exacto de su ficha.
 - No modificar los archivos del kit salvo petición expresa. El diseño va en el CSS del proyecto.
+- Excepción acordada: la barra de progreso de la sección 2 la mueve `assets/js/ediciones.js` leyendo el avance del carril E25 (`_skTween`), porque E07 mide la sección entera y no el tramo fijado.
 - Toda página HTML nueva parte de `.claude/skills/scrollkit/plantilla.html`.
 
 ## Idioma
