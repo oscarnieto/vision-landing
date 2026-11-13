@@ -1,6 +1,7 @@
 /* Animación de entrada del logo VISIÓN del hero (inspirada en el motion graphics de referencia):
    la V aparece sola en el centro, se desliza a su sitio con desenfoque de movimiento, las I y los
-   palos de la N entran desde la derecha, la S, la O y la diagonal de la N se dibujan y la barra se traza.
+   palos de la N entran desde la derecha, la S, la O y la diagonal de la N se dibujan, la barra se traza
+   y, ya construido, el logo pasa de grande a pequeño.
    ScrollKit no tiene un efecto de construcción de logotipo, por eso va aparte con GSAP. */
 (function () {
   'use strict';
@@ -11,9 +12,17 @@
 
   function show() { logo.style.visibility = 'visible'; }
 
+  // Tamaño final del logo (ver CSS .hero-logo.is-small): 31,14 % del ancho en escritorio, 64 % en móvil
+  function smallRatio() { return window.matchMedia('(max-width: 767px)').matches ? 0.64 : 0.3114; }
+  function settleSmall() {
+    logo.classList.add('is-small');
+    if (window.gsap) window.gsap.set(svg, { clearProps: 'transform' });
+  }
+
   var gsap = window.gsap;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!gsap || reduce) { show(); return; }
+  if (!gsap) { show(); return; }
+  if (reduce) { settleSmall(); show(); return; }
 
   try {
     var q = function (sel) { return svg.querySelectorAll(sel); };
@@ -45,6 +54,8 @@
         // Al terminar, quitar filtros y máscaras: el logo queda idéntico al original
         [v, n].concat(Array.prototype.slice.call(is)).forEach(function (el) { el.removeAttribute('filter'); });
         q('[mask]').forEach(function (el) { el.removeAttribute('mask'); });
+        // Fijar el tamaño pequeño con CSS para que se adapte si cambia el ancho de la ventana
+        settleSmall();
       }
     });
 
@@ -64,6 +75,12 @@
     tl.to(draws[1], { attr: { 'stroke-dashoffset': 0 }, duration: 0.9, ease: 'power2.inOut' }, '<0.12');      // O
     tl.to(draws[2], { attr: { 'stroke-dashoffset': 0 }, duration: 0.55, ease: 'power2.inOut' }, '<0.1');      // diagonal N
     tl.to(bar, { scaleX: 1, rotation: 0, duration: 0.7, ease: 'expo.out' }, '<0.25');
+
+    // 5 · Una vez construido, pasa de grande a pequeño (centrado)
+    tl.to(svg, {
+      scale: function () { return smallRatio() / 1.0146; },  // el logo grande ocupa el 101,46 % del ancho
+      transformOrigin: '50% 50%', duration: 1.3, ease: 'expo.inOut'
+    }, '+=0.45');
   } catch (e) {
     show();
   }
