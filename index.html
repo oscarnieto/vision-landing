@@ -44,11 +44,16 @@
 
   <main id="top">
 
-    <!-- HERO · vídeo diferido (E29) con parallax (E16) -->
+    <!-- HERO · vídeo que empieza a cargar al abrir la página (E29 solo lo pausa fuera de pantalla) con parallax (E16) -->
     <section class="hero" data-theme="dark">
       <div class="hero-media" data-image-move="18">
-        <video data-video data-src="assets/video/hero.mp4" data-src-mobile="assets/video/hero-mobile.mp4"
-               poster="assets/img/hero-poster.jpg" autoplay muted playsinline aria-hidden="true"></video>
+        <video data-video poster="assets/img/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+          <!-- Móvil: recorte vertical a resolución completa · HEVC donde se pueda (más ligero), H.264 para el resto -->
+          <source media="(max-width: 767px)" src="assets/video/hero-mobile.hevc.mp4" type='video/mp4; codecs="hvc1"'>
+          <source media="(max-width: 767px)" src="assets/video/hero-mobile.mp4" type="video/mp4">
+          <source src="assets/video/hero.hevc.mp4" type='video/mp4; codecs="hvc1"'>
+          <source src="assets/video/hero.mp4" type="video/mp4">
+        </video>
       </div>
       <!-- Logo en línea (mismos trazados que assets/figma/vision-logo.svg) para animar cada letra al cargar -->
       <h1 class="hero-logo">
