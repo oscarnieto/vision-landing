@@ -46,8 +46,11 @@
     preload();
   }
 
+  // Las ediciones «Próximamente» no reproducen su vídeo (quedan atenuadas con el póster)
+  var playable = videos.filter(function (v) { return !v.closest('.latest--soon'); });
+
   if (canHover) {
-    videos.forEach(function (v) {
+    playable.forEach(function (v) {
       var card = v.closest('.latest');
       var active = false;
       // Si el primer play() se corta mientras carga, reintentarlo cuando ya se pueda reproducir
@@ -65,6 +68,6 @@
         if (e.isIntersecting) play(e.target); else e.target.pause();
       });
     }, { threshold: 0.6 });
-    videos.forEach(function (v) { inView.observe(v); });
+    playable.forEach(function (v) { inView.observe(v); });
   }
 })();

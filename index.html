@@ -47,7 +47,7 @@
     <!-- HERO · vídeo que empieza a cargar al abrir la página (E29 solo lo pausa fuera de pantalla) con parallax (E16) -->
     <section class="hero" data-theme="dark">
       <div class="hero-media" data-image-move="18">
-        <video data-video poster="assets/img/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <video disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" data-video poster="assets/img/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
           <!-- Móvil: recorte vertical a resolución completa · HEVC donde se pueda (más ligero), H.264 para el resto -->
           <source media="(max-width: 767px)" src="assets/video/hero-mobile.hevc.mp4" type='video/mp4; codecs="hvc1"'>
           <source media="(max-width: 767px)" src="assets/video/hero-mobile.mp4" type="video/mp4">
@@ -107,7 +107,7 @@
         <article class="latest">
           <a class="latest__media" href="https://vision.savills.es/barcelona/2026/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true" data-cursor-text="Visita la web">
             <div class="latest__zoom" data-image-move="12">
-              <video class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-barcelona.jpg" width="760" height="720">
+              <video disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-barcelona.jpg" width="760" height="720">
                 <source src="assets/video/ciudades/barcelona.mp4" type="video/mp4">
               </video>
             </div>
@@ -123,7 +123,7 @@
         <article class="latest">
           <a class="latest__media" href="https://vision.savills.es/malaga/2026/index.html" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true" data-cursor-text="Visita la web">
             <div class="latest__zoom" data-image-move="12">
-              <video class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-malaga.jpg" width="760" height="720">
+              <video disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-malaga.jpg" width="760" height="720">
                 <source src="assets/video/ciudades/malaga.mp4" type="video/mp4">
               </video>
             </div>
@@ -136,10 +136,10 @@
           </a>
         </article>
 
-        <article class="latest">
-          <div class="latest__media" data-cursor-text="Próximamente">
+        <article class="latest latest--soon">
+          <div class="latest__media">
             <div class="latest__zoom" data-image-move="12">
-              <video class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-valencia.jpg" width="760" height="720">
+              <video disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-valencia.jpg" width="760" height="720">
                 <source src="assets/video/ciudades/valencia.mp4" type="video/mp4">
               </video>
             </div>
@@ -148,10 +148,10 @@
           <span class="u-link u-link--soon">Próximamente</span>
         </article>
 
-        <article class="latest">
-          <div class="latest__media" data-cursor-text="Próximamente">
+        <article class="latest latest--soon">
+          <div class="latest__media">
             <div class="latest__zoom" data-image-move="12">
-              <video class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-sevilla.jpg" width="760" height="720">
+              <video disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback noplaybackrate" class="city-video" muted loop playsinline preload="none" data-poster="assets/img/poster-sevilla.jpg" width="760" height="720">
                 <source src="assets/video/ciudades/sevilla.mp4" type="video/mp4">
               </video>
             </div>
@@ -223,14 +223,14 @@
                 <span class="ed-card__year">2026</span>
               </div>
             </a>
-            <div class="ed-card ed-card--soon" data-city="valencia" data-cursor-text="Próximamente">
+            <div class="ed-card ed-card--soon" data-city="valencia">
               <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><picture><source srcset="assets/img/ediciones/valencia-1.avif" type="image/avif"><img src="assets/img/ediciones/valencia-1.jpg" alt="" width="1024" height="682" loading="lazy" decoding="async"></picture></div><span class="ed-card__soon">Próximamente</span></div>
               <div class="ed-card__row">
                 <h3 class="ed-card__city">Valencia</h3>
                 <span class="ed-card__year">2026</span>
               </div>
             </div>
-            <div class="ed-card ed-card--soon" data-city="sevilla" data-cursor-text="Próximamente">
+            <div class="ed-card ed-card--soon" data-city="sevilla">
               <div class="ed-card__media"><div class="ed-card__zoom" data-image-move="14"><img src="assets/img/poster-sevilla.jpg" alt="" width="760" height="720" loading="lazy" decoding="async"></div><span class="ed-card__soon">Próximamente</span></div>
               <div class="ed-card__row">
                 <h3 class="ed-card__city">Sevilla</h3>

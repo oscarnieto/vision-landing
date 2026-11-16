@@ -6,7 +6,6 @@
   --ink: #121414;
   --grey: #434343;
   --muted: #787878;
-  --placeholder: #d9d9d9;
   --black: #000;
   --white: #fff;
   --sans: "Montserrat", Arial, sans-serif;
@@ -27,6 +26,18 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+/* Sin selección de texto ni arrastre nativo de imágenes y enlaces (petición del usuario) */
+body { -webkit-user-select: none; user-select: none; }
+img, a { -webkit-user-drag: none; }
+
+/* Los vídeos son decorativos: sin puntero, el navegador no muestra sus botones superpuestos
+   (imagen en imagen, mejora de vídeo…). El hover y los clics los recibe la tarjeta. */
+video { pointer-events: none; }
+
+/* Saltos de línea más limpios a cualquier zoom: títulos equilibrados y párrafos sin palabras sueltas */
+h1, h2, h3, .kicker, .s3-lead { text-wrap: balance; }
+p { text-wrap: pretty; }
 img, video { display: block; max-width: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
@@ -267,8 +278,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .latest__row span { font-weight: 400; }
 .latest .u-link { margin-top: 38.8px; }
 @media (hover: hover) {
-  .latest:hover .latest__zoom { transform: scale(1.04); }
+  .latest:not(.latest--soon):hover .latest__zoom { transform: scale(1.04); }
 }
+/* Ediciones «Próximamente»: atenuadas y sin efectos al pasar el ratón */
+.latest--soon .latest__zoom { opacity: .35; }
+.latest--soon .latest__row { opacity: .5; }
+
+/* Arrastre del carril con el ratón */
+.section-2.sk-h-active { cursor: grab; }
+.section-2.sk-h-active.is-dragging,
+.section-2.sk-h-active.is-dragging * { cursor: grabbing; }
 
 .s2-progress {
   position: absolute;
@@ -389,14 +408,19 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .ed-card { position: relative; display: block; color: inherit; }
 .ed-card--soon { cursor: default; }
+.ed-card--soon .ed-card__zoom { opacity: .35; }
+.ed-card--soon .ed-card__row { opacity: .5; }
 .ed-card[hidden] { display: none; }
 .ed-card__media {
   position: relative;
   aspect-ratio: 296.38 / 305.71;
   border-radius: 10px;
   overflow: hidden;
-  background: var(--placeholder);
+  background: var(--ink);            /* oscuro: si el redondeo deja una rendija de 1 px, no se ve */
 }
+/* La imagen 2 px más ancha que el marco para que nunca asome el fondo por los lados */
+.ed-card__zoom.sk-move-y > picture,
+.ed-card__zoom.sk-move-y > img { width: calc(100% + 2px); margin-left: -1px; }
 .ed-card__zoom { height: 100%; transition: transform 1.2s var(--ease); }
 .ed-card__soon {
   position: absolute;
@@ -450,9 +474,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   line-height: 1.218;
 }
 @media (hover: hover) {
-  .ed-card:hover .ed-card__zoom { transform: scale(1.04); }
-  .ed-card:hover .ed-card__arrow { transform: translateX(4px); }
-  .ed-card:hover .ed-card__row::after { transform: none; }
+  .ed-card:not(.ed-card--soon):hover .ed-card__zoom { transform: scale(1.04); }
+  .ed-card:not(.ed-card--soon):hover .ed-card__arrow { transform: translateX(4px); }
+  .ed-card:not(.ed-card--soon):hover .ed-card__row::after { transform: none; }
 }
 
 /* ---------- Footer (E24) ---------- */

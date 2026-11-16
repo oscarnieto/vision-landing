@@ -27,6 +27,9 @@
 - Excepción acordada: la barra de progreso de la sección 2 la mueve `assets/js/ediciones.js` leyendo el avance del carril E25 (`_skTween`), porque E07 mide la sección entera y no el tramo fijado.
 - Excepción acordada: en la sección 4, la línea amarilla que sigue al ratón por las pestañas y la entrada escalonada de las tarjetas al filtrar (GSAP) están en `assets/js/ediciones.js`; ScrollKit no tiene efectos de filtro ni de hover.
 - Excepción acordada: animación de entrada del logo VISIÓN del hero en `assets/js/logo-intro.js` (GSAP). El logo va en línea en `index.html` con los mismos trazados que `assets/figma/vision-logo.svg`; si cambia el logo, actualizar ambos y los recortes `clipPath` (S, O, diagonal de la N). No usar máscaras ni filtros SVG en esa animación: Safari (iPhone) los pinta mal y aparecen manchas blancas.
+- Excepción acordada: arrastre con el ratón del carril de la sección 2 (izquierda/derecha) en `assets/js/ediciones.js`; mueve el scroll dentro del tramo fijado de E25. Allí también se recolocan los textos E09 si el zoom parte sus líneas.
+- Petición del usuario: sin selección de texto en toda la web (`user-select: none`) y vídeos sin interacción (`pointer-events: none` + `disablepictureinpicture`) para que el navegador no muestre sus botones encima.
+- Ediciones «Próximamente» (`.latest--soon`, `.ed-card--soon`): atenuadas, sin etiqueta de cursor, sin efectos de hover y sin reproducir vídeo.
 - El header NO usa E02: va en `position: absolute` sobre el hero, se va con el scroll y no reaparece al subir (petición del usuario).
 - Toda página HTML nueva parte de `.claude/skills/scrollkit/plantilla.html`.
 
