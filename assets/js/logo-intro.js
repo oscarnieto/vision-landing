@@ -4,6 +4,8 @@
    el logo pasa de grande a pequeño y aparece la insignia «10º ANIVERSARIO» debajo.
    Solo usa transformaciones y recortes (clipPath): sin filtros ni máscaras SVG, que Safari pinta mal.
    En WebKit (todo iOS y Safari) no se animan recortes: iOS no los repinta y el logo se quedaba a medias.
+   Si la animación no puede ejecutarse, el logo se queda en su estado final del CSS (completo, pequeño y
+   con la insignia), nunca a medias.
    ScrollKit no tiene un efecto de construcción de logotipo, por eso va aparte con GSAP. */
 (function () {
   'use strict';
@@ -11,6 +13,9 @@
   var logo = document.querySelector('.hero-logo');
   var svg = logo && logo.querySelector('.logo-anim');
   if (!svg) return;
+
+  var badge = logo.querySelector('.hero-badge');
+  var text = logo.querySelector('.hero-badge__text');
 
   function show() { logo.style.visibility = 'visible'; }
 
@@ -21,42 +26,60 @@
     svg.style.display = '';
   }
 
+  function unclip() {
+    svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
+  }
+
   // Todos los navegadores de iPhone/iPad (Safari, Chrome, Brave, Firefox, Edge) y Safari de Mac usan WebKit,
   // que en iOS no repinta bien los recortes animados del SVG: ahí la S, la O y la N aparecen con movimiento
   // y opacidad en lugar de «dibujarse». Chrome, Edge, Firefox y Android mantienen el efecto de dibujo.
   var ua = navigator.userAgent;
   var webkit = /AppleWebKit/.test(ua) && !/(Chrome|Chromium|Edg|OPR)\//.test(ua) && !/Android/.test(ua);
 
-  // Tamaño final del logo (ver CSS .hero-logo.is-small): 31,14 % del ancho en escritorio, 64 % en móvil
+  // Tamaño final del logo (ver CSS .hero-logo): 31,14 % del ancho en escritorio, 64 % en móvil
   function smallRatio() { return window.matchMedia('(max-width: 767px)').matches ? 0.64 : 0.3114; }
-  function settleSmall() {
-    logo.classList.add('is-small');
-    if (window.gsap) window.gsap.set(svg, { clearProps: 'transform' });
-  }
-
-  // «10º ANIVERSARIO»: la banda amarilla se despliega de izquierda a derecha y el texto sube dentro.
-  // El logo no se mueve. Estado final en CSS: .is-badged
-  function badgeIn() {
-    var badge = logo.querySelector('.hero-badge');
-    var text = logo.querySelector('.hero-badge__text');
-    if (!badge || !text) return;
-    var g = window.gsap;
-    g.timeline({
-      onComplete: function () {
-        logo.classList.add('is-badged');
-        g.set([badge, text], { clearProps: 'all' });
-      }
-    })
-      .set(badge, { opacity: 1, clipPath: 'inset(0% 100% 0% 0%)' })
-      .set(text, { yPercent: 120 })
-      .to(badge, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: 'expo.inOut' }, 0.1)
-      .to(text, { yPercent: 0, duration: 0.8, ease: 'expo.out' }, 0.55);
-  }
 
   var gsap = window.gsap;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!gsap) { show(); return; }
-  if (reduce) { settleSmall(); logo.classList.add('is-badged'); show(); return; }
+
+  // Sin animación, el logo se queda en su estado final del CSS (completo, pequeño y con la insignia):
+  // - si no hay GSAP (librerías bloqueadas por la red, un bloqueador o un fallo de descarga),
+  // - si el sistema pide reducir el movimiento,
+  // - o si el logo ya está a la vista porque los scripts han llegado tarde (red lenta) y la red de
+  //   seguridad del CSS lo ha mostrado: empezar ahora haría que desapareciera y volviera a construirse.
+  if (!gsap || reduce || window.getComputedStyle(logo).visibility === 'visible') { show(); return; }
+
+  var tl, btl, done = false;
+
+  // Salta al estado final al instante, sin depender de GSAP (red de seguridad y errores)
+  function settle() {
+    if (done) return;
+    done = true;
+    try { if (tl) tl.kill(); if (btl) btl.kill(); } catch (e) { /* seguir con la limpieza */ }
+    unclip();
+    [svg, badge, text].concat(Array.prototype.slice.call(svg.querySelectorAll('path'))).forEach(function (el) {
+      if (el) el.removeAttribute('style');
+    });
+    logo.classList.remove('is-anim');
+    repaint();
+    show();
+  }
+
+  // «10º ANIVERSARIO»: la banda amarilla se despliega de izquierda a derecha y el texto sube dentro.
+  // El logo no se mueve.
+  function badgeIn() {
+    gsap.set(badge, { clipPath: 'inset(0% 100% 0% 0%)' });
+    gsap.set(text, { yPercent: 120 });
+    logo.classList.remove('is-anim');
+    btl = gsap.timeline({
+      onComplete: function () {
+        done = true;
+        gsap.set([badge, text], { clearProps: 'all' });
+      }
+    })
+      .to(badge, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: 'expo.inOut' }, 0.1)
+      .to(text, { yPercent: 0, duration: 0.8, ease: 'expo.out' }, 0.55);
+  }
 
   try {
     var v = svg.querySelector('.l-v');
@@ -84,9 +107,15 @@
 
     var sPath = svg.querySelector('.l-s');
     var oPath = svg.querySelector('.l-o');
-    if (webkit) svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
 
-    // Estado inicial
+    // Estado inicial: logo grande y sin insignia. Los recortes solo se ponen aquí, mientras dura la
+    // animación (fuera de WebKit), para que el logo nunca se quede a medias si algo falla.
+    logo.classList.add('is-anim');
+    if (!webkit) {
+      sPath.setAttribute('clip-path', 'url(#clip-s)');
+      oPath.setAttribute('clip-path', 'url(#clip-o)');
+      n.setAttribute('clip-path', 'url(#clip-n)');
+    }
     gsap.set(v, { x: toCenter, autoAlpha: 0, scale: 0.92, transformOrigin: '50% 50%' });
     if (webkit) {
       gsap.set(sPath, { autoAlpha: 0, y: 60 });
@@ -97,15 +126,17 @@
     gsap.set(bar, { scaleX: 0, transformOrigin: '0% 50%' });
     show();
 
-    var tl = gsap.timeline({
+    tl = gsap.timeline({
       delay: 0.35,
       onComplete: function () {
-        // Al terminar, quitar los recortes: el logo queda idéntico al original
-        svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
-        repaint();
-        // Fijar el tamaño pequeño con CSS para que se adapte si cambia el ancho de la ventana
-        settleSmall();
-        badgeIn();
+        try {
+          // Al terminar, quitar los recortes: el logo queda idéntico al original
+          unclip();
+          repaint();
+          // El tamaño pequeño lo fija el CSS (se adapta si cambia el ancho de la ventana)
+          gsap.set(svg, { clearProps: 'transform' });
+          badgeIn();
+        } catch (e) { settle(); }
       }
     });
 
@@ -141,9 +172,7 @@
 
     // Red de seguridad: si por cualquier motivo la animación no ha terminado unos segundos después de
     // que la página esté a la vista, se salta al final (logo completo, pequeño y con la insignia)
-    var guard = function () {
-      setTimeout(function () { if (tl.progress() < 1) tl.progress(1); }, 6000);
-    };
+    var guard = function () { setTimeout(settle, 7000); };
     if (document.visibilityState === 'visible') guard();
     else document.addEventListener('visibilitychange', function once() {
       if (document.visibilityState !== 'visible') return;
@@ -151,9 +180,6 @@
       guard();
     });
   } catch (e) {
-    svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
-    gsap.set(svg.querySelectorAll('path'), { clearProps: 'all' });
-    repaint();
-    show();
+    settle();
   }
 })();

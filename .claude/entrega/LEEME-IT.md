@@ -81,7 +81,7 @@ Estado del resto de controles: sin backend, formularios, login ni datos de usuar
 ## Caché recomendada
 
 - `index.html`: sin caché o caché corta (`Cache-Control: no-cache`), para que los cambios se vean al momento.
-- Resto (`assets/`, `scroll-kit/`): `Cache-Control: public, max-age=604800` (7 días). Si se actualizan imágenes o vídeos con el mismo nombre, purgar la caché del CDN/proxy.
+- Resto (`assets/`, `scroll-kit/`): `Cache-Control: public, max-age=604800` (7 días). Los CSS y JS se piden con `?v=<huella>` (cambia cuando cambia el archivo), así que una actualización nunca mezcla archivos nuevos y antiguos; el CDN/proxy no debe ignorar la query string. Si se actualizan imágenes o vídeos con el mismo nombre, purgar la caché del CDN/proxy.
 
 ## Notas sobre el vídeo
 

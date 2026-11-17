@@ -138,22 +138,24 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .hero-media video {
   background: #7d747b url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAMKADAAQAAAABAAAAGwAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgAGwAwAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMABwcHBwcHDAcHDBEMDAwRFxEREREXHhcXFxcXHiQeHh4eHh4kJCQkJCQkJCsrKysrKzIyMjIyODg4ODg4ODg4OP/bAEMBCQkJDg0OGQ0NGTsoISg7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O//dAAQAA//aAAwDAQACEQMRAD8AuLfx1ML6P0rgbW/85EZnwZc4X0B6Y/Cra35iuoracPmX7rAfKR+f51rLFNdAWHiduL+P0pRfRN0rhpdSktdikb0cgqxOPTBz9a0IZNw3MBHITxxn8/ap+utK7H9VTdkdWb2MU03qVjKZJcb1yo6lTjPvg1JNPGHCK4UjnHU4+lCx3kP6p5n/0POL6e1huUhukyqqFGMnb9OlOguLW6LLKzoY+QRx83QdM1oyKt1cRSXADsrBQSOgw3+ArEv7ia2M/kNszIxOPXisU72SOmS5btmRd3l1HcPbPNuReAexHatjTJNTTAj+WNzkrJyp/DrUGrQQ/wBlJdbB5rEZbueO9dJexRpJFEgwrAZA9wKl2diVTak7s24F1K6XCRgRyEYSI4JPvz/UUgW5VWYw/uu7xPnrjnnJPTtXPaPPNCdkTsodW3YPXHAq5HcTQvZxxMVWeTEijo3PcdKVraI0vfU//9k=") center / cover no-repeat;
 }
+/* Estado por defecto = estado final: logo completo, pequeño (31,14 % del ancho; 64 % en móvil) y con la
+   insignia. Es lo que se ve si la animación de entrada no llega a ejecutarse (sin JS, red lenta o librerías
+   bloqueadas). Durante la animación, .is-anim lo pone grande y oculta la insignia. */
 .hero-logo {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 101.46%;
+  width: 31.14%;
   transform: translate(-50%, -50%);
   line-height: 0;
 }
+@media (max-width: 767px) { .hero-logo { width: 64%; } }
+.hero-logo.is-anim { width: 101.46%; }
 .hero-logo img,
 .hero-logo svg { display: block; width: 100%; height: auto; overflow: visible; }
-/* Oculto hasta que arranca la animación; si el JS falla, aparece a los 4 s */
+/* Oculto hasta que arranca la animación; si el JS no llega a tiempo, aparece en su estado final a los 4 s */
 .sk-js .hero-logo { visibility: hidden; animation: logo-safety 0s 4s forwards; }
 @keyframes logo-safety { to { visibility: visible; } }
-/* Tamaño final tras la animación de entrada */
-.hero-logo.is-small { width: 31.14%; }
-@media (max-width: 767px) { .hero-logo.is-small { width: 64%; } }
 
 /* «10º ANIVERSARIO»: medidas proporcionales al ancho del logo (cqw = 1 % del ancho del h1) */
 .hero-logo { container-type: inline-size; }
@@ -169,7 +171,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   justify-content: center;
   overflow: hidden;
   background: var(--yellow);
-  opacity: 0;
 }
 .hero-badge__text {
   display: block;
@@ -180,8 +181,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   color: var(--black);
   white-space: nowrap;
 }
-/* Estado final: insignia visible bajo el logo (el logo no se mueve) */
-.hero-logo.is-badged .hero-badge { opacity: 1; }
+/* Oculta mientras el logo se construye; después se despliega (el logo no se mueve) */
+.hero-logo.is-anim .hero-badge { opacity: 0; }
 
 /* ---------- Section 1 (E12) ---------- */
 .section-1 { padding: clamp(96px, 16.05vw, 231px) 0; }

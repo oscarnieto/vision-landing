@@ -12,6 +12,8 @@ mkdir -p "$DST"
 find "$DST" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 
 cd "$SRC"
+# Las URLs de los CSS/JS llevan ?v=<huella>: si alguna no corresponde al archivo actual, no se entrega
+bash .claude/versionar.sh --comprobar
 mkdir -p "$DST/assets/img" "$DST/assets/video"
 cp ./*.html "$DST/"
 cp -R assets/css assets/js assets/figma "$DST/assets/"
@@ -31,7 +33,7 @@ find "$DST" -name .DS_Store -delete
 # Comprobación: todo recurso local referenciado existe en la entrega, y nada sobra
 cd "$DST"
 missing=0
-refs=$( { grep -ohE '(src|href|srcset|data-src|data-poster|poster)="[^"#:]+"' ./*.html | sed -E 's/^[a-z-]+="//; s/"$//'
+refs=$( { grep -ohE '(src|href|srcset|data-src|data-poster|poster)="[^"#:]+"' ./*.html | sed -E 's/^[a-z-]+="//; s/"$//; s/\?.*$//'
           grep -ohE 'url\("?[^")]+' assets/css/*.css | sed -E 's/url\("?//' | { grep -v '^data:' || true; } | sed 's|^|assets/css/|'; } | sort -u )
 for r in $refs; do
   [ -e "$r" ] || { echo "FALTA: $r"; missing=1; }
