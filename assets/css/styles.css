@@ -644,23 +644,38 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .footer-policies :focus-visible,
 .legal-button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
 
-/* ---------- Página legal (política de cookies) ---------- */
+/* ---------- Página legal (política de cookies) · hero según Figma (Cookies 241:44, 1440 px) ---------- */
+.page-legal .site-header { color: var(--black); }
 .legal-hero {
-  padding: clamp(120px, 14vw, 200px) 0 clamp(56px, 6vw, 88px);
-  background: var(--ink);
-  color: var(--white);
+  min-height: 442px;
+  padding: clamp(146px, 15.56vw, 224px) 0 49px;
+  background: var(--white);
+  color: var(--black);
 }
-.legal-back { display: inline-block; margin-bottom: 32px; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.legal-back {
+  gap: 4px;
+  padding-bottom: 6px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.legal-back__arrow { width: 8.69px; height: auto; transform: rotate(180deg); }
+.legal-back .u-link__line { height: 2px; }
+@media (hover: hover) {
+  .legal-back:hover .u-link__arrow { transform: rotate(180deg) translateX(4px); }
+}
 .legal-hero h1 {
+  margin-top: 25px;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(36px, 4.2vw, 60px);
-  line-height: 1.1;
+  font-size: clamp(44px, 5.49vw, 79px);
+  line-height: 1.218;
 }
-.legal-hero h1 em { font-style: italic; font-weight: 500; color: var(--yellow); }
-.legal-date { margin-top: 16px; font-size: 14px; opacity: .7; }
+.legal-hero h1 em { font-style: italic; font-weight: 500; letter-spacing: -.03em; }
+.legal-date { margin: 8px 0 0 4px; font-size: 12px; line-height: 1.218; color: var(--muted); }
 .legal-body { padding: clamp(56px, 6vw, 96px) 0 clamp(80px, 9vw, 140px); }
 /* En la página legal sí se puede seleccionar y copiar el texto */
+/* Alineado al mismo margen izquierdo que el título del hero */
+.container.legal-text { margin-left: max(var(--gutter), (100% - 1268px) / 2); margin-right: auto; }
 .legal-text { max-width: 838px; font-size: 16px; line-height: 1.6; -webkit-user-select: text; user-select: text; }
 .legal-text h2 { margin-top: 48px; font-weight: 700; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.25; }
 .legal-text h2:first-child { margin-top: 0; }
