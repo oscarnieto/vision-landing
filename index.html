@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- GitHub Pages no permite cabeceras HTTP propias: la CSP y la política de referer van en meta.
+  <!-- CSP y política de referer en meta (el servidor debe enviarlas además como cabeceras HTTP).
        El hash sha256 autoriza solo el script de arranque de ScrollKit. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net 'sha256-CwWbBf7jQqvh/bJnN8zix/pIAcILUmqMV5j4DXi/Lmo='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -25,7 +25,7 @@
   <!-- E06 · cursor con etiqueta (solo se ve sobre las imágenes con data-cursor-text) -->
   <div class="cursor-pill" data-cursor aria-hidden="true"><span data-cursor-label></span></div>
 
-  <!-- Desenfoque progresivo fijo en la parte inferior de la pantalla (como orchid-template) -->
+  <!-- Desenfoque progresivo fijo en la parte inferior de la pantalla -->
   <div class="bottom-blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
   <!-- Header: solo arriba del todo, se va con el scroll y no reaparece al subir -->
@@ -91,7 +91,7 @@
       </div>
     </section>
 
-    <!-- SECTION 2 · E25 scroll horizontal (estilo bitwip) + E16 parallax + vídeo de cada ciudad que se reproduce al pasar el ratón -->
+    <!-- SECTION 2 · E25 scroll horizontal + E16 parallax + vídeo de cada ciudad que se reproduce al pasar el ratón -->
     <section class="section-2" id="ultimas" data-horizontal data-theme="dark">
       <div class="s2-track" data-horizontal-track>
         <div class="s2-intro">

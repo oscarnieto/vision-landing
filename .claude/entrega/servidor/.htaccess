@@ -1,0 +1,35 @@
+# Apache 2.4 (mod_headers, mod_rewrite, mod_expires). Copiar en la raíz del sitio, junto a index.html.
+# INFO-01: en la configuración principal del servidor: ServerTokens Prod y ServerSignature Off.
+
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+AddType image/avif .avif
+AddType video/mp4 .mp4
+AddType image/svg+xml .svg
+DirectoryIndex index.html
+
+<IfModule mod_headers.c>
+  Header always unset X-Powered-By
+  Header always set Content-Security-Policy "default-src 'none'; script-src 'self' https://cdn.jsdelivr.net 'sha256-CwWbBf7jQqvh/bJnN8zix/pIAcILUmqMV5j4DXi/Lmo='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  <Files "index.html">
+    Header set Cache-Control "no-cache"
+  </Files>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/avif "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 7 days"
+  ExpiresByType video/mp4 "access plus 7 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType text/javascript "access plus 7 days"
+</IfModule>

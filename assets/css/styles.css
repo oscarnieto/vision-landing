@@ -74,7 +74,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   white-space: nowrap;
 }
 
-/* ---------- Enlace subrayado (hover estilo bitwip) ---------- */
+/* ---------- Enlace subrayado (el subrayado se recoge al pasar el ratón) ---------- */
 .u-link {
   position: relative;
   display: inline-flex;
@@ -341,7 +341,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .s3-body p + p { margin-top: 1.218em; }
 
-/* ---------- Section 4 (filtro + hover estilo bitwip) ---------- */
+/* ---------- Section 4 (filtro + hover) ---------- */
 .section-4 {
   position: relative;
   background: var(--ink);
@@ -445,7 +445,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   gap: 8px;
   margin-top: 24px;
 }
-/* Línea amarilla que barre la tarjeta al pasar el ratón (como las oficinas de bitwip) */
+/* Línea amarilla que barre la tarjeta al pasar el ratón */
 .ed-card__row::after {
   content: "";
   position: absolute;

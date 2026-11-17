@@ -33,6 +33,12 @@
 - El header NO usa E02: va en `position: absolute` sobre el hero, se va con el scroll y no reaparece al subir (petición del usuario).
 - Toda página HTML nueva parte de `.claude/skills/scrollkit/plantilla.html`.
 
+## Entrega a IT (Azure DevOps / servidor corporativo)
+
+- La carpeta limpia para IT es `../vision-landing-devops` (repositorio git propio, rama `main`, sin remoto: lo añade IT o el usuario). Solo contiene lo que usa la web + `README.md` (guía de despliegue) + `servidor/` (ejemplos IIS `web.config`, nginx, Apache `.htaccess` con las cabeceras de seguridad).
+- Regenerarla tras cualquier cambio: `bash .claude/entrega/preparar-entrega.sh` (comprueba que no falte ni sobre ningún archivo) y hacer commit en esa carpeta. Plantillas en `.claude/entrega/` (`LEEME-IT.md` → `README.md`).
+- No poner en el código comentarios que nombren webs de referencia ni detalles internos: la entrega es corporativa.
+
 ## Idioma
 
 - Hablar siempre en español con el usuario.
