@@ -57,8 +57,9 @@
     done = true;
     try { if (tl) tl.kill(); if (btl) btl.kill(); } catch (e) { /* seguir con la limpieza */ }
     unclip();
+    // GSAP mueve las letras con el atributo transform (en SVG) y la opacidad con style: se quitan ambos
     [svg, badge, text].concat(Array.prototype.slice.call(svg.querySelectorAll('path'))).forEach(function (el) {
-      if (el) el.removeAttribute('style');
+      if (el) { el.removeAttribute('style'); el.removeAttribute('transform'); }
     });
     logo.classList.remove('is-anim');
     repaint();
@@ -170,15 +171,22 @@
     // Duración total 2 s más corta (de 4,8 s a 2,8 s), acelerando todos los pasos por igual
     tl.timeScale(tl.duration() / (tl.duration() - 2));
 
-    // Red de seguridad: si por cualquier motivo la animación no ha terminado unos segundos después de
-    // que la página esté a la vista, se salta al final (logo completo, pequeño y con la insignia)
-    var guard = function () { setTimeout(settle, 7000); };
-    if (document.visibilityState === 'visible') guard();
-    else document.addEventListener('visibilitychange', function once() {
-      if (document.visibilityState !== 'visible') return;
-      document.removeEventListener('visibilitychange', once);
-      guard();
-    });
+    // Red de seguridad (solo cuenta el tiempo con la página a la vista): si la animación se atasca a mitad
+    // y lleva 3 s sin avanzar, o si 7 s después aún no ha terminado, se salta al final (logo completo,
+    // pequeño y con la insignia)
+    var STALL = 3000, LIMIT = 7000;
+    var last = -1, still = 0, seen = 0, prev = Date.now();
+    var watch = setInterval(function () {
+      var now = Date.now(), dt = now - prev;
+      prev = now;
+      if (done) { clearInterval(watch); return; }
+      if (document.visibilityState !== 'visible') { still = 0; return; }
+      seen += dt;
+      var pos = tl.totalTime() + (btl ? btl.totalTime() : 0);
+      still = pos === last ? still + dt : 0;
+      last = pos;
+      if (still >= STALL || seen >= LIMIT) { clearInterval(watch); settle(); }
+    }, 250);
   } catch (e) {
     settle();
   }
