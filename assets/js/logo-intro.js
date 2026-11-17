@@ -3,6 +3,7 @@
    derecha, la S, la O y la diagonal de la N se van descubriendo, la barra se traza y, ya construido,
    el logo pasa de grande a pequeño y aparece la insignia «10º ANIVERSARIO» debajo.
    Solo usa transformaciones y recortes (clipPath): sin filtros ni máscaras SVG, que Safari pinta mal.
+   En WebKit (todo iOS y Safari) no se animan recortes: iOS no los repinta y el logo se quedaba a medias.
    ScrollKit no tiene un efecto de construcción de logotipo, por eso va aparte con GSAP. */
 (function () {
   'use strict';
@@ -12,6 +13,19 @@
   if (!svg) return;
 
   function show() { logo.style.visibility = 'visible'; }
+
+  // Fuerza a repintar el logo (iOS a veces no repinta un SVG tras cambiar o quitar un clip-path)
+  function repaint() {
+    svg.style.display = 'none';
+    void svg.getBoundingClientRect();
+    svg.style.display = '';
+  }
+
+  // Todos los navegadores de iPhone/iPad (Safari, Chrome, Brave, Firefox, Edge) y Safari de Mac usan WebKit,
+  // que en iOS no repinta bien los recortes animados del SVG: ahí la S, la O y la N aparecen con movimiento
+  // y opacidad en lugar de «dibujarse». Chrome, Edge, Firefox y Android mantienen el efecto de dibujo.
+  var ua = navigator.userAgent;
+  var webkit = /AppleWebKit/.test(ua) && !/(Chrome|Chromium|Edg|OPR)\//.test(ua) && !/Android/.test(ua);
 
   // Tamaño final del logo (ver CSS .hero-logo.is-small): 31,14 % del ancho en escritorio, 64 % en móvil
   function smallRatio() { return window.matchMedia('(max-width: 767px)').matches ? 0.64 : 0.3114; }
@@ -68,8 +82,16 @@
       wedgeO.setAttribute('points', pts.join(' '));
     }
 
+    var sPath = svg.querySelector('.l-s');
+    var oPath = svg.querySelector('.l-o');
+    if (webkit) svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
+
     // Estado inicial
     gsap.set(v, { x: toCenter, autoAlpha: 0, scale: 0.92, transformOrigin: '50% 50%' });
+    if (webkit) {
+      gsap.set(sPath, { autoAlpha: 0, y: 60 });
+      gsap.set(oPath, { autoAlpha: 0, scale: 0.6, rotation: -90, transformOrigin: '50% 50%' });
+    }
     gsap.set(is, { x: 260, autoAlpha: 0 });
     gsap.set(n, { x: 260, autoAlpha: 0 });
     gsap.set(bar, { scaleX: 0, transformOrigin: '0% 50%' });
@@ -80,6 +102,7 @@
       onComplete: function () {
         // Al terminar, quitar los recortes: el logo queda idéntico al original
         svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
+        repaint();
         // Fijar el tamaño pequeño con CSS para que se adapte si cambia el ancho de la ventana
         settleSmall();
         badgeIn();
@@ -96,10 +119,16 @@
     tl.to([is[0], is[1], n], { x: 0, autoAlpha: 1, duration: 0.7, ease: 'expo.out', stagger: 0.09 }, '<0.3');
 
     // 4 · Se descubren la S, la O y la diagonal de la N, y se traza la barra
-    tl.to(wipeS, { attr: { height: 300 }, duration: 0.8, ease: 'power2.inOut' }, '-=0.25');
-    tl.to(o, { p: 1, duration: 0.9, ease: 'power2.inOut', onUpdate: drawWedge }, '<0.12');
-    tl.to(wipeN, { attr: { width: 335 }, duration: 0.55, ease: 'power2.inOut' }, '<0.1');
-    tl.to(bar, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, '<0.25');
+    if (webkit) {
+      tl.to(sPath, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'expo.out' }, '-=0.25');
+      tl.to(oPath, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.9, ease: 'expo.out' }, '<0.12');
+      tl.to(bar, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, '<0.35');
+    } else {
+      tl.to(wipeS, { attr: { height: 300 }, duration: 0.8, ease: 'power2.inOut' }, '-=0.25');
+      tl.to(o, { p: 1, duration: 0.9, ease: 'power2.inOut', onUpdate: drawWedge }, '<0.12');
+      tl.to(wipeN, { attr: { width: 335 }, duration: 0.55, ease: 'power2.inOut' }, '<0.1');
+      tl.to(bar, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, '<0.25');
+    }
 
     // 5 · Una vez construido, pasa de grande a pequeño (centrado)
     tl.to(svg, {
@@ -109,8 +138,22 @@
 
     // Duración total 2 s más corta (de 4,8 s a 2,8 s), acelerando todos los pasos por igual
     tl.timeScale(tl.duration() / (tl.duration() - 2));
+
+    // Red de seguridad: si por cualquier motivo la animación no ha terminado unos segundos después de
+    // que la página esté a la vista, se salta al final (logo completo, pequeño y con la insignia)
+    var guard = function () {
+      setTimeout(function () { if (tl.progress() < 1) tl.progress(1); }, 6000);
+    };
+    if (document.visibilityState === 'visible') guard();
+    else document.addEventListener('visibilitychange', function once() {
+      if (document.visibilityState !== 'visible') return;
+      document.removeEventListener('visibilitychange', once);
+      guard();
+    });
   } catch (e) {
     svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
+    gsap.set(svg.querySelectorAll('path'), { clearProps: 'all' });
+    repaint();
     show();
   }
 })();
