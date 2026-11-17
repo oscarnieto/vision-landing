@@ -5,7 +5,8 @@ Web estática: HTML, CSS, JavaScript, imágenes y vídeos. **No necesita compila
 ## Contenido
 
 ```
-index.html              Página única
+index.html              Página principal
+politica-de-cookies.html  Política de cookies (enlazada desde el pie y desde el aviso)
 assets/css/             Estilos
 assets/js/              Scripts propios (filtro, vídeos, animación del logo)
 assets/img/             Pósters y fotos de las ediciones (AVIF + JPEG de respaldo)
@@ -70,6 +71,12 @@ default-src 'none'; script-src 'self' https://cdn.jsdelivr.net 'sha256-CwWbBf7jQ
 El hash `sha256-…` autoriza el único script en línea de la página. Si se modifica ese script, hay que recalcularlo.
 
 Estado del resto de controles: sin backend, formularios, login ni datos de usuario (los controles de autenticación, sesión, autorización e inyección no aplican). Sin secretos en el código. Todos los enlaces externos llevan `rel="noopener noreferrer"`.
+
+## Cookies y privacidad
+
+- La web **no instala cookies** propias ni de terceros. Muestra un aviso de consentimiento (`assets/js/cookies.js`) que guarda la elección del visitante en el almacenamiento local (`vision-consent`, 12 meses).
+- Si en el futuro se añade analítica (p. ej. Google Analytics), debe cargarse **solo** cuando `VisionConsent.get().analytics === true` (ver `VisionConsent.onChange`), actualizar `politica-de-cookies.html` y ampliar la CSP con los dominios del proveedor.
+- La política de cookies y el aviso deben revisarlos el equipo legal / DPO de Savills.
 
 ## Caché recomendada
 
