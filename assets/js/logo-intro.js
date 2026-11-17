@@ -106,6 +106,9 @@
       scale: function () { return smallRatio() / 1.0146; },  // el logo grande ocupa el 101,46 % del ancho
       transformOrigin: '50% 50%', duration: 1.3, ease: 'expo.inOut'
     }, '+=0.45');
+
+    // Duración total 2 s más corta (de 4,8 s a 2,8 s), acelerando todos los pasos por igual
+    tl.timeScale(tl.duration() / (tl.duration() - 2));
   } catch (e) {
     svg.querySelectorAll('[clip-path]').forEach(function (el) { el.removeAttribute('clip-path'); });
     show();
