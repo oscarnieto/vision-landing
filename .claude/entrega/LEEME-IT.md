@@ -19,7 +19,7 @@ README.md               Esta guía — no hay que publicarla
 
 Todas las rutas son **relativas**: la web funciona igual en la raíz de un dominio (`https://vision.savills.es/`) que en una subcarpeta (`https://www.savills.es/vision/`).
 
-Tamaño total ≈ 38 MB (la mayor parte, vídeo).
+Tamaño total ≈ 44 MB (la mayor parte, vídeo).
 
 ## Requisitos del servidor
 
